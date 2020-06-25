@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    serviceaccounts.openshift.io/oauth-redirectreference.blue: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"blue"}}'
+    serviceaccounts.openshift.io/oauth-redirectreference.green: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"green"}}'
+    serviceaccounts.openshift.io/oauth-redirectreference.red: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"red"}}'
+    serviceaccounts.openshift.io/oauth-redirectreference.test: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"test"}}'
+    serviceaccounts.openshift.io/oauth-redirectreference.testconsole: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"testconsole"}}'
+  creationTimestamp: null
+  labels:
+    app: labconsole
+    template: labconsole
+  name: opentlc
+  selfLink: /api/v1/namespaces/labconsole/serviceaccounts/opentlc

@@ -5,8 +5,7 @@ metadata:
     serviceaccounts.openshift.io/oauth-redirectreference.blue: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"blue"}}'
     serviceaccounts.openshift.io/oauth-redirectreference.green: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"green"}}'
     serviceaccounts.openshift.io/oauth-redirectreference.red: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"red"}}'
-    serviceaccounts.openshift.io/oauth-redirectreference.test: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"test"}}'
-    serviceaccounts.openshift.io/oauth-redirectreference.testconsole: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"testconsole"}}'
+    serviceaccounts.openshift.io/oauth-redirectreference.dynamic: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"dynamic"}}'
   creationTimestamp: null
   labels:
     app: labconsole

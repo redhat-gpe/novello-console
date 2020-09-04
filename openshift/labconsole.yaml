@@ -65,14 +65,13 @@ objects:
       name: ${NAME}
     tls:
       termination: edge
-
+      insecureEdgeTerminationPolicy: Redirect
 - apiVersion: v1
   kind: Route
   metadata:
     name: console-${NAME}
   spec:
     host: ${APPLICATION_DOMAIN}
-    path: "/console"
     to:
       kind: Service
       name: console-${NAME}

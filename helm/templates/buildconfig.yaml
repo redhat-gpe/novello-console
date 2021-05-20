@@ -1,0 +1,60 @@
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+  {{- with .Values.buildconfig.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ .Values.handle }}
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: {{ .Values.handle }}:latest
+  postCommit:
+    script: ./manage.py test
+  source:
+    contextDir: ''
+    git:
+      ref: {{ .Values.buildconfig.git.ref }}
+      uri: {{ .Values.buildconfig.git.uri }}
+    type: Git
+  strategy:
+    sourceStrategy:
+      env:
+      - name: PIP_INDEX_URL
+        value: {{ .Values.buildconfig.env.pip }}
+      - name: OS_AUTH_URL
+        valueFrom:
+          secretKeyRef:
+            name: {{ .Values.buildconfig.env.secretname }}
+            key: osp_auth_url
+      - name: OS_PROJECT_NAME
+        valueFrom:
+          secretKeyRef:
+            name: {{ .Values.buildconfig.env.secretname }}
+            key: osp_auth_project
+      - name: OS_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: {{ .Values.buildconfig.env.secretname }}
+            key: osp_auth_username
+      - name: OS_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: {{ .Values.buildconfig.env.secretname }}
+            key: osp_auth_password
+      from:
+        kind: ImageStreamTag
+        name: python:{{ .Values.buildconfig.pyversion }}
+        namespace: {{ .Values.buildconfig.namespace }}
+    type: Source
+  triggers:
+  - type: ImageChange
+  - type: ConfigChange
+  - github:
+      secret: {{ randAlphaNum 40 }}
+    type: GitHub

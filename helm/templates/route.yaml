@@ -1,0 +1,28 @@
+{{- if .Values.route.enabled -}}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ .Values.handle }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  host: ""
+  {{- with .Values.route.tls }}
+  tls:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  to:
+    kind: Service
+    name: {{ .Values.handle }}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: console-{{ .Values.handle }}
+spec:
+  host: ""
+  to:
+    kind: Service
+    name: console-{{ .Values.handle }}
+{{- end }}

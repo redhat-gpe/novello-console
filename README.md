@@ -7,3 +7,22 @@ How to create a new lab console, example:
 * Scale to 5 (or 10 if is heavily used): `oc scale dc/blue  --replicas=5`
 
 Example with blue, access to: `https://blue-labconsole.apps.shared.na.openshift.opentlc.com/`
+
+
+
+---
+
+
+
+Using helm chart:
+
+- Create new project: `labconsole`
+- Create a secret in the new project with:
+  - `osp_auth_url`
+  - `osp_auth_password`
+  - `osp_auth_username`
+  - `osp_auth_password`
+- Run: `helm install labconsole-v1 helm/`
+- If you want to use different secret and handle on the fly run: `helm install --set buildconfig.env.secret='osp-secret' --set handle='dynamicv2' labconsole-v1 helm/` 
+  
+  

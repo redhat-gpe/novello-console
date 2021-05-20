@@ -1,0 +1,45 @@
+handle: dynamic
+
+serviceaccount:
+  enabled: true
+
+route:
+  enabled: true
+  annotations: {}
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+
+service:
+  name: web
+  port: 8080
+  annotations: {
+    description: 'Exposes and load balances the application pods'
+    }
+
+buildconfig:
+  annotations: {
+    description: 'Defines how to build the application',
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    }
+  git:
+    uri: https://github.com/agonzalezrh/labconsole.git
+    ref: ''
+  env:
+    pip: ''
+    secretname: openstack-orange
+  pyversion: 3.6
+  namespace: openshift
+
+deploymentconfig:
+  replicas: 1
+  resources:
+    limits:
+      memory: 512Mi
+  env:
+    user: user
+    app: ''
+
+ports:
+    target: 5051
+    targetConsole: 8080

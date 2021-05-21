@@ -28,7 +28,7 @@ spec:
         - --openshift-service-account={{ .Values.handle }}
         - --upstream=http://localhost:{{ .Values.ports.targetConsole }}
         - --cookie-secret=bdna987REWQ1234
-        image: docker.io/openshift/oauth-proxy:latest
+        image: openshift/oauth-proxy:latest
         imagePullPolicy: Always
         name: {{ .Values.handle }}-oauth-proxy
         ports:
@@ -37,7 +37,6 @@ spec:
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-
       - env:
         - name: TEST_USER
           value: {{ .Values.deploymentconfig.env.user }}

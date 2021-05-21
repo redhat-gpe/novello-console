@@ -9,6 +9,12 @@ route:
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
+  #useCert: ...
+  domain: ''
+  ref:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
 
 service:
   name: web

@@ -1,4 +1,50 @@
 {{- if .Values.route.enabled -}}
+  {{- if .Values.route.useCert -}}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.handle }}-apps
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  secretName: {{ .Values.handle }}-apps
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+  - server auth
+  dnsNames:
+  - {{ .Values.handle }}.{{ .Values.route.domain }}
+      {{- with .Values.route.ref }}
+  issuerRef:
+        {{- toYaml . | nindent 4 }}
+      {{- end }}
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    cert-utils-operator.redhat-cop.io/certs-from-secret: {{ .Values.handle }}-apps
+  name: {{ .Values.handle }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  host: {{ .Values.handle }}.{{ .Values.route.domain }}
+    {{- with .Values.route.tls }}
+  tls:
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  to:
+    kind: Service
+    name: {{ .Values.handle }}
+    weight: 100
+  wildcardPolicy: None
+  {{ else }}
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
@@ -15,6 +61,7 @@ spec:
   to:
     kind: Service
     name: {{ .Values.handle }}
+  {{- end }}
 ---
 apiVersion: route.openshift.io/v1
 kind: Route

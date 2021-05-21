@@ -27,7 +27,6 @@ buildconfig:
     ref: ''
   env:
     pip: ''
-    secretname: openstack-orange
   pyversion: 3.6
   namespace: openshift
 
@@ -43,3 +42,11 @@ deploymentconfig:
 ports:
     target: 5051
     targetConsole: 8080
+
+cloudauth:
+    secretEnable: true
+    secretName: cloud-auth
+    url: labconsole
+    project: labconsole
+    username: labconsole
+    password: labconsole

@@ -30,22 +30,22 @@ spec:
       - name: OS_AUTH_URL
         valueFrom:
           secretKeyRef:
-            name: {{ .Values.buildconfig.env.secretname }}
+            name: {{ .Values.cloudauth.secretName }}
             key: osp_auth_url
       - name: OS_PROJECT_NAME
         valueFrom:
           secretKeyRef:
-            name: {{ .Values.buildconfig.env.secretname }}
+            name: {{ .Values.cloudauth.secretName }}
             key: osp_auth_project
       - name: OS_USERNAME
         valueFrom:
           secretKeyRef:
-            name: {{ .Values.buildconfig.env.secretname }}
+            name: {{ .Values.cloudauth.secretName }}
             key: osp_auth_username
       - name: OS_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: {{ .Values.buildconfig.env.secretname }}
+            name: {{ .Values.cloudauth.secretName }}
             key: osp_auth_password
       from:
         kind: ImageStreamTag

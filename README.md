@@ -8,21 +8,12 @@ How to create a new lab console, example:
 
 Example with blue, access to: `https://blue-labconsole.apps.shared.na.openshift.opentlc.com/`
 
-
-
 ---
-
-
 
 Using helm chart:
 
 - Create new project: `labconsole`
-- Create a secret in the new project with:
-  - `osp_auth_url`
-  - `osp_auth_password`
-  - `osp_auth_username`
-  - `osp_auth_password`
-- Run: `helm install labconsole-v1 helm/`
-- If you want to use different secret and handle on the fly run: `helm install --set buildconfig.env.secret='osp-secret' --set handle='dynamicv2' labconsole-v1 helm/` 
+- Run:`helm install --set cloudauth.password='dummy' --set cloudauth.url='dummy' --set cloudauth.username='admin' --set  cloudauth.project='admin' helm-1 helm/`
+- If you want to use different secret and handle on the fly run: `helm install --set cloudauth.secretName='osp-secret' --set cloudauth.secretEnable='false' --set handle='dynamicv2' labconsole-v1 helm/` 
   
   

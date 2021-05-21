@@ -1,5 +1,5 @@
 {{- if .Values.route.enabled -}}
-  {{- if .Values.route.useCert -}}
+  {{- if .Values.route.useCertManager -}}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -53,11 +53,10 @@ metadata:
   labels:
     {{- include "app.labels" . | nindent 4 }}
 spec:
-  host: ""
-  {{- with .Values.route.tls }}
+    {{- with .Values.route.tls }}
   tls:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
   to:
     kind: Service
     name: {{ .Values.handle }}
@@ -70,7 +69,6 @@ metadata:
   labels:
     {{- include "app.labels" . | nindent 4 }}
 spec:
-  host: ""
   to:
     kind: Service
     name: console-{{ .Values.handle }}

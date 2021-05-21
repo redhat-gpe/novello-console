@@ -9,7 +9,7 @@ route:
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
-  #useCert: ...
+  #useCertManager: ...
   domain: ''
   ref:
     name: letsencrypt

@@ -65,11 +65,11 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: console-{{ .Values.handle }}
+  name: admin-{{ .Values.handle }}
   labels:
     {{- include "app.labels" . | nindent 4 }}
 spec:
   to:
     kind: Service
-    name: console-{{ .Values.handle }}
+    name: admin-{{ .Values.handle }}
 {{- end }}

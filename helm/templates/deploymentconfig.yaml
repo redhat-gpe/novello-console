@@ -46,7 +46,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: django-secret-key
-              name: {{ .Values.handle }}
+              name: {{ .Values.handle }}-django
         image: ' '
         name: {{ include "app.name" . }}
         ports:

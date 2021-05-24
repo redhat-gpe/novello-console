@@ -1,4 +1,4 @@
-handle: dynamic
+handle: console
 
 serviceaccount:
   enabled: true

@@ -47,6 +47,8 @@ spec:
             secretKeyRef:
               key: django-secret-key
               name: {{ .Values.handle }}-django
+        - name: OS_CLIENT_CONFIG_FILE
+          value: {{ .Values.multiosp.path }}/clouds.yaml
         image: ' '
         name: {{ include "app.name" . }}
         ports:
@@ -54,6 +56,14 @@ spec:
         resources:
           limits:
             memory: {{ .Values.deploymentconfig.resources.limits.memory }}
+        volumeMounts:
+            - mountPath: {{ .Values.multiosp.path }}
+              name: {{ .Values.multiosp.secretName }}-volume
+              readOnly: true
+      volumes:
+        - name: {{ .Values.multiosp.secretName }}-volume
+          secret:
+            secretName: {{ .Values.multiosp.secretName }}
   triggers:
   - imageChangeParams:
       automatic: true

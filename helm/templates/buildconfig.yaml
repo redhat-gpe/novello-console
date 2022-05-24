@@ -14,8 +14,7 @@ spec:
     to:
       kind: ImageStreamTag
       name: {{ .Values.handle }}:latest
-  postCommit:
-    script: ./manage.py test
+
   source:
     contextDir: ''
     git:
@@ -27,26 +26,6 @@ spec:
       env:
       - name: PIP_INDEX_URL
         value: {{ .Values.buildconfig.env.pip }}
-      - name: OS_AUTH_URL
-        valueFrom:
-          secretKeyRef:
-            name: {{ .Values.cloudauth.secretName }}
-            key: osp_auth_url
-      - name: OS_PROJECT_NAME
-        valueFrom:
-          secretKeyRef:
-            name: {{ .Values.cloudauth.secretName }}
-            key: osp_auth_project
-      - name: OS_USERNAME
-        valueFrom:
-          secretKeyRef:
-            name: {{ .Values.cloudauth.secretName }}
-            key: osp_auth_username
-      - name: OS_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: {{ .Values.cloudauth.secretName }}
-            key: osp_auth_password
       from:
         kind: ImageStreamTag
         name: python:{{ .Values.buildconfig.pyversion }}

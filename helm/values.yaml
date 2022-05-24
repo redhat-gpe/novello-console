@@ -1,4 +1,4 @@
-handle: console
+handle: labconsole
 
 serviceaccount:
   enabled: true
@@ -29,7 +29,7 @@ buildconfig:
       template.alpha.openshift.io/wait-for-ready: 'true'
     }
   git:
-    uri: https://github.com/agonzalezrh/labconsole.git
+    uri: https://github.com/yvarbanov/labconsole.git
     ref: ''
   env:
     pip: ''
@@ -42,17 +42,24 @@ deploymentconfig:
     limits:
       memory: 512Mi
   env:
-    user: user
+    user: labconsole
     app: ''
 
 ports:
-    target: 5051
-    targetConsole: 8080
+  target: 5051
+  targetConsole: 8080
 
 cloudauth:
-    secretEnable: true
-    secretName: cloud-auth
-    url: labconsole
-    project: labconsole
-    username: labconsole
-    password: labconsole
+  secretEnable: true
+  secretName: cloud-auth
+  url: labconsole
+  project: labconsole
+  username: labconsole
+  password: labconsole
+
+multiosp: 
+  secretEnable: true
+  secretName: multi-osp
+  path: /etc/labconsole/secrets
+  clouds: >-
+    labconsole_clouds_b64enc

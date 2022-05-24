@@ -29,7 +29,7 @@ buildconfig:
       template.alpha.openshift.io/wait-for-ready: 'true'
     }
   git:
-    uri: https://github.com/yvarbanov/labconsole.git
+    uri: https://github.com/redhat-gpte/labconsole.git
     ref: ''
   env:
     pip: ''

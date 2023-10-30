@@ -28,7 +28,7 @@ spec:
         - --openshift-service-account={{ .Values.handle }}
         - --upstream=http://localhost:{{ .Values.ports.targetConsole }}
         - --cookie-secret=bdna987REWQ1234
-        image: openshift/oauth-proxy:latest
+        image: {{ .Values.oauthProxy.image }}
         imagePullPolicy: Always
         name: {{ .Values.handle }}-oauth-proxy
         ports:

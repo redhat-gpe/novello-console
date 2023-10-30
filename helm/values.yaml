@@ -63,3 +63,6 @@ multiosp:
   path: /etc/labconsole/secrets
   clouds: >-
     labconsole_clouds_b64enc
+
+oauthProxy:
+  image: registry.redhat.io/openshift4/ose-oauth-proxy:v4.12
